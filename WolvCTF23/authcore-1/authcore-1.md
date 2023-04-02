@@ -8,7 +8,7 @@ I participated in this CTF alone, and am currently not participating in a compet
 Authcore-1 begins with a description roughly paraphrased "recover the application binary from this bootloader". 
 There's an attached binary blob called "bootloader\_extracted.bin" that we're tasked with reverse engineering. 
 This is a pretty small binary, so I take the first couple steps and run `file`, `binwalk`, and `strings`.  
-[Quick forensic check on bootloader\_extracted.bin](images/forensics.png)  
+![Quick forensic check on bootloader\_extracted.bin](images/forensics.png)  
 
 While this could have been more helpful, `file` tells us that the binary blob is not structured.
 `Binwalk` tells us that there are no binary signatures from this file, hinting that the ISA might be a lesser known architecture.
@@ -17,7 +17,7 @@ Finally, `strings` provides us the most helpful information in that the binary i
 However, we still don't have an ISA, so inserting into Ghidra isn't a good option yet. 
 For bootloader RE, a good practice is to look at the first chunk of the file.  
 
-[Hexdump of bootloader\_extracted.bin](images/hexdump.png)
+![Hexdump of bootloader\_extracted.bin](images/hexdump.png)
 
 Here are a few good tricks to identifying some of the common architectures.
  - For x86 or x64, function prologues typically start with lots of consecutive '5X' bytes. 
@@ -145,14 +145,14 @@ Identifying this function is central to success in the problem.
 
 <details>
 <summary>What common cryptographic function is this?</summary>
-<br>
 It's CTR mode encryption/decryption. 
 
 Looking back to where the CTR encrypt function is called, we notice that the final argument, or *nonce*, is always 0. 
 Fixed-nonce CTR can be treated as a repeating-key XOR cipher, or in classical terms, a Vigenere Cipher.
-The key-length is 16, and from other reverse engineering efforts, we can derive the first 16-bytes of the bootloader header as 
-</br>
+The key-length is 16, and from other reverse engineering efforts, we can derive the first 16-bytes of the bootloader header as
 </details>
+
+
 ```
 struct boot_header {
   uint32_t magic;         // BLEP
