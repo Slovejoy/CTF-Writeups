@@ -4,7 +4,7 @@ The following problems, authcore-1 and authcore-2, were part of a 3 part RE and 
 I was the only solve for authcore-1, and present a partial writeup for the unsolved authcore-2. 
 I participated in this CTF alone, and am currently not participating in a competitive team. 
 
-## Authcore-1 Introduction and ISA Identification
+## Authcore-1 -- Introduction and ISA Identification
 Authcore-1 begins with a description roughly paraphrased "recover the application binary from this bootloader". 
 There's an attached binary blob called "bootloader\_extracted.bin" that we're tasked with reverse engineering. 
 This is a pretty small binary, so I take the first couple steps and run `file`, `binwalk`, and `strings`.  
@@ -85,7 +85,7 @@ do {
 /* pretty printing // hexlifying inlined to follow */
 ```
 This is pretty messy, but if the debug data is encrypted then its `FUN_08000a82` that's doing it. 
-In `FUN_08000a82`, we observe the following decompiled code,
+In `FUN_08000a82` (encrypt\_read\_buffer), we observe the following decompiled code,
 ```
 void encrypt_read_buffer(byte *key,int dst,uint length,uint nonce,uint index)
 {
