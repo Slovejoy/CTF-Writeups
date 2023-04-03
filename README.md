@@ -1,5 +1,8 @@
 # CTF Writeups 
 Miscellaneous CTF writeups.  
+Temporary holding place until I finally get github pages setup.  
+
+Current alter ego: *daves\_biggest\_fan*
 
 [2023](#2023)
 
