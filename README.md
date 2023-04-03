@@ -2,7 +2,7 @@
 Miscellaneous CTF writeups.  
 Temporary holding place until I finally get github pages setup.  
 
-Current alter ego: *daves\_biggest\_fan*
+Current alter ego: *daves\_biggest\_fan*  
 Current team: None 
 
 [2023](#2023)
