@@ -12,8 +12,10 @@ In authcore-1, we recovered the cryptographic key used for the decrypting the ap
 # Authcore-2 -- Decrypting the Application Binary 
 In authcore-1, we discovered a "read" subcommand hidden in the recovery mode bootloader. This subcommand uses CTR-mode encryption function to send the application binary ciphertext over the problem's TCP connection. However, in authcore-1 the nonce was reused, allowing us to ignore the cryptography and treat the ciphertext as a weak Vigenere cipher. The read function increments the counter, eliminating this tactic. 
 
-![CTR encrypt](https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#/media/File:CTR_encryption_2.svg)
-![CTR decrypt](https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#/media/File:CTR_decryption_2.svg) 
+![CTR encrypt](https://upload.wikimedia.org/wikipedia/commons/4/4d/CTR_encryption_2.svg)
+![CTR decrypt](https://upload.wikimedia.org/wikipedia/commons/3/3c/CTR_decryption_2.svg) 
+
+*Images from [Wikipedia](https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation)*
 
 One important note about CTR mode is that encryption and decryption are the same operation, just with plaintext/ciphertext respectively. While it is certainly possibly to recreate the previously discussed `FUN_08000a82` or *encrypt\_read\_buffer* entirely in python, I instead opt to recreate this decryption routine using the Unicorn emulation framework. The following excerpt, from [app\_decrypt.py](code/app_decrypt.py), shows the emulation of the *encrypt\_read\_buffer* routine,
 
